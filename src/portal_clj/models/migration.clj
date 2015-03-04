@@ -2,6 +2,21 @@
   (:require [clojure.java.jdbc :as sql]
             [portal-clj.db :as db]))
 
+(defn user-migration []
+  (sql/execute! db/spec
+                ["CREATE TABLE IF NOT EXISTS users (
+                   id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                   firstname VARCHAR(128) NOT NULL,
+                   lastname VARCHAR(128),
+                   username VARCHAR(64) NOT NULL,
+                   email VARCHAR(512) NOT NULL,
+                   password VARBINARY,
+                   admin BOOLEAN NOT NULL DEFAULT 0,
+                   comments BOOLEAN NOT NULL,
+                   signup_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                   active BOOLEAN NOT NULL DEFAULT 1
+                 )"]))
+
 (defn post-migration []
   (sql/execute! db/spec
                 ["CREATE TABLE IF NOT EXISTS posts (
