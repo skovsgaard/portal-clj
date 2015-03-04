@@ -17,23 +17,29 @@
                    active BOOLEAN NOT NULL DEFAULT 1
                  )"]))
 
-(defn post-migration []
-  (sql/execute! db/spec
-                ["CREATE TABLE IF NOT EXISTS posts (
-                   id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                   title VARCHAR(255) NOT NULL,
-                   body TEXT,
-                   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-                 )"]))
-
-
 (defn page-migration []
   (sql/execute! db/spec
                 ["CREATE TABLE IF NOT EXISTS pages (
                    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                    title VARCHAR(255) NOT NULL,
                    body TEXT,
-                   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                   user_id INT(11) NOT NULL FOREIGN KEY REFERENCES users(id) ON DELETE CASCADE,
+                   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                   slug VARCHAR(255) NOT NULL,
+                   active BOOLEAN NOT NULL DEFAULT 1
+                 )"]))
+
+(defn post-migration []
+  (sql/execute! db/spec
+                ["CREATE TABLE IF NOT EXISTS posts (
+                   id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                   title VARCHAR(255) NOT NULL,
+                   body TEXT,
+                   user_id INT(11) NOT NULL FOREIGN KEY REFERENCES users(id) ON DELETE CASCADE,
+                   commentable BOOLEAN NOT NULL DEFAULT 0,
+                   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                   slug VARCHAR(255) NOT NULL,
+                   active BOOLEAN NOT NULL DEFAULT 1
                  )"]))
 
 (defn do-migrate []
