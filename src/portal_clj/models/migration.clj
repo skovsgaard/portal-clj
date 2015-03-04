@@ -10,7 +10,7 @@
                    lastname VARCHAR(128),
                    username VARCHAR(64) NOT NULL,
                    email VARCHAR(512) NOT NULL,
-                   password VARBINARY,
+                   password VARBINARY(255),
                    admin BOOLEAN NOT NULL DEFAULT 0,
                    comments BOOLEAN NOT NULL,
                    signup_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -23,10 +23,11 @@
                    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                    title VARCHAR(255) NOT NULL,
                    body TEXT,
-                   user_id INT(11) NOT NULL FOREIGN KEY REFERENCES users(id) ON DELETE CASCADE,
+                   user_id INT(11) NOT NULL,
                    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                    slug VARCHAR(255) NOT NULL,
-                   active BOOLEAN NOT NULL DEFAULT 1
+                   active BOOLEAN NOT NULL DEFAULT 1,
+                   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                  )"]))
 
 (defn post-migration []
@@ -35,18 +36,20 @@
                    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                    title VARCHAR(255) NOT NULL,
                    body TEXT,
-                   user_id INT(11) NOT NULL FOREIGN KEY REFERENCES users(id) ON DELETE CASCADE,
+                   user_id INT(11) NOT NULL,
                    commentable BOOLEAN NOT NULL DEFAULT 0,
                    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                    slug VARCHAR(255) NOT NULL,
-                   active BOOLEAN NOT NULL DEFAULT 1
+                   active BOOLEAN NOT NULL DEFAULT 1,
+                   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                  )"]))
 
 (defn do-migrate []
   (do
     (println "Creating database scaffold... ")
-    (post-migration)
+    (user-migration)
     (page-migration)
+    (post-migration)
     (println "Successfully created DB entries.")))
 
 (defn migrated? [table-name]
@@ -56,10 +59,11 @@
 
 (defn all-migrated? []
   (and
+   (migrated? "users")
    (migrated? "posts")
    (migrated? "pages")))
 
-(defn migrate []
-  (if (all-migrated?)
-    (println "Migrations already up to date.")
-    (do-migrate)))
+(defn -main []
+  ;(if (all-migrated?)
+  ;  (println "Migrations already up to date.")
+  (do-migrate))
