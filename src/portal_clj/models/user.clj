@@ -5,7 +5,7 @@
 (defn all []
   (into [] (sql/query db/spec ["select * from users order by id username"])))
 
-(defn create [user]
+(defn create! [user]
   (sql/insert! db/spec :users user))
 
 (defn get [id]
@@ -15,4 +15,4 @@
   (sql/update! db/spec :users updated ["id = ?" id]))
 
 (defn delete! [id]
-  (sql/delete! db/spec :pages ["id = ?" id]))
+  (sql/delete! db/spec :users ["id = ?" id]))

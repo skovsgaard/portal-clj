@@ -5,7 +5,7 @@
 (defn all []
   (into [] (sql/query db/spec ["select * from posts order by id title"])))
 
-(defn create [post]
+(defn create! [post]
   (sql/insert! db/spec :posts post))
 
 (defn get [id]
