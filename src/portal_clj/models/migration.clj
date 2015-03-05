@@ -27,6 +27,7 @@
                    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                    slug VARCHAR(256) NOT NULL,
                    active BOOLEAN NOT NULL DEFAULT 1,
+                   restricted BOOLEAN NOT NULL DEFAULT 0,
                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                  )"]))
 
@@ -41,6 +42,7 @@
                    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                    slug VARCHAR(256) NOT NULL,
                    active BOOLEAN NOT NULL DEFAULT 1,
+                   restricted BOOLEAN NOT NULL DEFAULT 0,
                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                  )"]))
 
@@ -70,7 +72,8 @@
   (sql/execute! db/spec
                 ["CREATE TABLE IF NOT EXISTS tags (
                    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                   name VARCHAR(256)
+                   name VARCHAR(256),
+                   restricted BOOLEAN NOT NULL DEFAULT 0
                  )"]))
 
 (defn post-tag-migration []
@@ -95,6 +98,46 @@
     (post-tag-migration)
     (println "Successfully created DB entries.")))
 
+(defn do-dummy []
+  (do
+    (println "Running dummy inserts.")
+    (sql/insert! db/spec :users {:firstname "Idi"
+                                 :lastname "Admin"
+                                 :username "dummy_admin"
+                                 :email "idi@admin.com"
+                                 :admin 1
+                                 :comments 1
+                                 :active 1})
+    (sql/insert! db/spec :users {:firstname "Some"
+                                 :lastname "Guy"
+                                 :username "dummy_user"
+                                 :email "some@guy.com"
+                                 :admin 0
+                                 :comments 1
+                                 :active 1})
+    (sql/insert! db/spec :pages {:title "Dummy Page"
+                                 :body "This here is some dummy text."
+                                 :user_id 1
+                                 :slug "dummy-page"
+                                 :active 1
+                                 :restricted 0})
+    (sql/insert! db/spec :posts {:title "Dummy Post"
+                                 :body "I'm a dummy update for testing purposes."
+                                 :user_id 2
+                                 :commentable 1
+                                 :slug "dummy-post"
+                                 :active 1
+                                 :restricted 0})
+    (sql/insert! db/spec :comment_authors {:name "Idi Admin" :user_id 1})
+    (sql/insert! db/spec :comments {:title "Heyoo"
+                                    :body "I'm a dummy comment, dummy!"
+                                    :author_id 1
+                                    :post_id 1})
+    (sql/insert! db/spec :tags {:name "dummy" :restricted 0})
+    (sql/insert! db/spec :post_tags {:post_id 1 :tag_id 1})
+    (println "Successfully added dummy content.")))
+
+
 (defn down [table-name]
   (sql/execute! db/spec
                 [(str "DROP TABLE IF EXISTS " table-name)]))
@@ -116,7 +159,11 @@
                                 "where table_name='" table-name "'")]))))
 
 (defn -main [& args]
-  (if (= (first args) "up")
+  (when (= (first args) "up")
     (do-migrate))
-  (if (= (first args) "down")
-    (nuke-all)))
+  (when (= (first args) "down")
+    (nuke-all))
+  (when (= (first args) "dummy")
+    (do-dummy))
+  (when (= (first args) "clean")
+    (dummy-down)))
