@@ -164,6 +164,4 @@
   (when (= (first args) "down")
     (nuke-all))
   (when (= (first args) "dummy")
-    (do-dummy))
-  (when (= (first args) "clean")
-    (dummy-down)))
+    (do-dummy)))
