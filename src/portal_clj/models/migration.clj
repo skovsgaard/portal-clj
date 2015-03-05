@@ -55,6 +55,17 @@
                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                  )"]))
 
+(defn comment-migration []
+  (sql/execute! db/spec
+                ["CREATE TABLE IF NOT EXISTS comments (
+                   id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                   title VARCHAR(128),
+                   body TEXT,
+                   author_id INT(11) NOT NULL,
+                   post_id INT(11) NOT NULL,
+                   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                 )"]))
+
 (defn do-migrate []
   (do
     (println "Creating database scaffold... ")
