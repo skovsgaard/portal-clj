@@ -95,16 +95,28 @@
     (post-tag-migration)
     (println "Successfully created DB entries.")))
 
+(defn down [table-name]
+  (sql/execute! db/spec
+                [(str "DROP TABLE IF EXISTS " table-name)]))
+
+(defn nuke-all []
+  (do
+    (down "post_tags")
+    (down "tags")
+    (down "comments")
+    (down "comment_authors")
+    (down "pages")
+    (down "posts")
+    (down "users")
+    (println "Destroyed all tables.")))
+
 (defn migrated? [table-name]
   (pos? (count (sql/query db/spec
                           [(str "select * from information_schema.tables "
                                 "where table_name='" table-name "'")]))))
 
-(defn all-migrated? []
-  (and
-   (migrated? "users")
-   (migrated? "posts")
-   (migrated? "pages")))
-
-(defn -main []
-  (do-migrate))
+(defn -main [& args]
+  (if (= (first args) "up")
+    (do-migrate))
+  (if (= (first args) "down")
+    (nuke-all)))
