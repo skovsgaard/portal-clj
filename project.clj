@@ -6,7 +6,8 @@
                  [mysql/mysql-connector-java "5.1.6"]
                  [compojure "1.1.6"]
                  [hiccup "1.0.5"]
-                 [ring-server "0.3.1"]]
+                 [ring-server "0.3.1"]
+                 [com.cemerick/friend "0.2.1"]]
   :plugins [[lein-ring "0.8.12"]]
   :ring {:handler portal-clj.handler/app
          :init portal-clj.handler/init
