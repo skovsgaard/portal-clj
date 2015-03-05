@@ -70,7 +70,7 @@
   (sql/execute! db/spec
                 ["CREATE TABLE IF NOT EXISTS tags (
                    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                   name VARCHAR(256),
+                   name VARCHAR(256)
                  )"]))
 
 (defn post-tag-migration []
@@ -80,7 +80,7 @@
                    post_id INT(11) NOT NULL,
                    tag_id INT(11) NOT NULL,
                    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
-                   FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCACDE
+                   FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
                  )"]))
 
 (defn do-migrate []
@@ -89,6 +89,10 @@
     (user-migration)
     (page-migration)
     (post-migration)
+    (author-migration)
+    (comment-migration)
+    (tag-migration)
+    (post-tag-migration)
     (println "Successfully created DB entries.")))
 
 (defn migrated? [table-name]
@@ -103,6 +107,4 @@
    (migrated? "pages")))
 
 (defn -main []
-  ;(if (all-migrated?)
-  ;  (println "Migrations already up to date.")
   (do-migrate))
