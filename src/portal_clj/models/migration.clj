@@ -10,7 +10,7 @@
                    lastname VARCHAR(128),
                    username VARCHAR(64) NOT NULL,
                    email VARCHAR(512) NOT NULL,
-                   password VARBINARY(255),
+                   password VARBINARY(256),
                    admin BOOLEAN NOT NULL DEFAULT 0,
                    comments BOOLEAN NOT NULL,
                    signup_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -21,11 +21,11 @@
   (sql/execute! db/spec
                 ["CREATE TABLE IF NOT EXISTS pages (
                    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                   title VARCHAR(255) NOT NULL,
+                   title VARCHAR(256) NOT NULL,
                    body TEXT,
                    user_id INT(11) NOT NULL,
                    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                   slug VARCHAR(255) NOT NULL,
+                   slug VARCHAR(256) NOT NULL,
                    active BOOLEAN NOT NULL DEFAULT 1,
                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                  )"]))
@@ -34,12 +34,12 @@
   (sql/execute! db/spec
                 ["CREATE TABLE IF NOT EXISTS posts (
                    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                   title VARCHAR(255) NOT NULL,
+                   title VARCHAR(256) NOT NULL,
                    body TEXT,
                    user_id INT(11) NOT NULL,
                    commentable BOOLEAN NOT NULL DEFAULT 0,
                    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                   slug VARCHAR(255) NOT NULL,
+                   slug VARCHAR(256) NOT NULL,
                    active BOOLEAN NOT NULL DEFAULT 1,
                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                  )"]))
@@ -64,6 +64,23 @@
                    author_id INT(11) NOT NULL,
                    post_id INT(11) NOT NULL,
                    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                 )"]))
+
+(defn tag-migration []
+  (sql/execute! db/spec
+                ["CREATE TABLE IF NOT EXISTS tags (
+                   id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                   name VARCHAR(256),
+                 )"]))
+
+(defn post-tag-migration []
+  (sql/execute! db/spec
+                ["CREATE TABLE IF NOT EXISTS post_tags (
+                   id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                   post_id INT(11) NOT NULL,
+                   tag_id INT(11) NOT NULL,
+                   FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+                   FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCACDE
                  )"]))
 
 (defn do-migrate []
