@@ -1,6 +1,6 @@
 # portal-clj
 
-FIXME
+A basic blog-oriented CMS as a Clojure learning project.
 
 ## Prerequisites
 
