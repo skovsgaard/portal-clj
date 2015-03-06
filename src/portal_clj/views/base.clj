@@ -4,8 +4,9 @@
 
 (def index
   [:section.wrap
-   [:h1 "Helloooooo, Wooooorld!"]
-   (layout/menu [["/" "Something"]
+   [:header.main-header
+     [:span.title "SBC - Single Board Computers"]
+     (layout/menu [["/" "Something"]
                  ["//google.com" "something"]
-                 ["#" "something else"]])
-   layout/footer])
+                 ["#" "something else"]])]
+    layout/footer])

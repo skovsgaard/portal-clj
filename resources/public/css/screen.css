@@ -5,9 +5,8 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
-h1 {
+.title {
   font-family: 'Exo 2', sans-serif;
-  font-weight: bold;
 }
 
 .wrap {
@@ -19,11 +18,23 @@ footer {
   font-size: 12px;
 }
 
+nav {
+  padding-left: 45px;
+  display: inline-block;
+  font-size: 12px;
+}
+
 .main-nav ul {
+  padding: 0;
   list-style: none;
 }
 
 .main-nav ul > li {
   display: inline;
-  padding: 4px 4px 4px 0;
+  padding: 4px;
+  border-radius: 5px;
+}
+
+.main-nav ul > li:hover {
+  background: #eee;
 }

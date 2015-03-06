@@ -4,7 +4,7 @@
 (defn common [& body]
   (html5
    [:head
-    [:title "Welcome to portal-clj"]
+    [:title "Welcome to SBC."]
     (include-css "/css/screen.css")
     [:script {:src "/js/cljs.js"}]]
     [:body body]))
