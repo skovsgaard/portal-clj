@@ -12,9 +12,9 @@
   [:section.wrap
    [:header.main-header
      [:span.title "SBC - Single Board Computers"]
-     (layout/menu [["/" "Something"]
-                   ["//google.com" "something"]
-                   ["#" "something else"]])]
+     (layout/menu [["/page/about" "About us"]
+                   ["/page/tags" "News by tag"]
+                   ["/page/login" "Login"]])]
    [:section.blog
     [:h1 "Latest news!"]
     (for [x posts] (post-item x))]

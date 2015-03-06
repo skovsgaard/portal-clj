@@ -128,6 +128,13 @@
                                  :slug "dummy-post"
                                  :active 1
                                  :restricted 0})
+    (sql/insert! db/spec :posts {:title "Also Dummy Post"
+                                 :body "I too am a dummy update for testing purposes."
+                                 :user_id 1
+                                 :commentable 1
+                                 :slug "also-dummy-post"
+                                 :active 1
+                                 :restricted 0})
     (sql/insert! db/spec :comment_authors {:name "Idi Admin" :user_id 1})
     (sql/insert! db/spec :comments {:title "Heyoo"
                                     :body "I'm a dummy comment, dummy!"
