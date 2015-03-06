@@ -1,5 +1,8 @@
 (ns portal-clj.views.base
-  (:require [hiccup.page :refer [html5 include-css]]))
+  (:use [hiccup.core])
+  (:require [portal-clj.views.layout :as layout]))
 
 (def index
-  [:h1 "Helloooooo, Wooooorld!"])
+  [:section.wrap
+   [:h1 "Helloooooo, Wooooorld!"]
+   layout/footer])
