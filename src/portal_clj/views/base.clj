@@ -22,7 +22,7 @@
    [:section.page-body
     [:h1 "About SBC"]
     [:p "SBC is a company specializing in retail sales of single board computers
-     and related components. The includes flagship products such as the
-     Raspberry Pi and the Parallela board."]
+     and related components. This includes the latest in flagship series such as
+     the Raspberry Pi and the Parallela board."]
     [:img {:src "/img/raspberry.jpg" :title "The all new Raspberry Pi 2"}]]
    layout/footer])

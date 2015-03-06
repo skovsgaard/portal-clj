@@ -4,7 +4,7 @@
 (defn common [& body]
   (html5
    [:head
-    [:title "Welcome to SBC."]
+    [:title "SBC - Single Board Computers"]
     (include-css "/css/screen.css")
     [:script {:src "/js/cljs.js"}]]
     [:body body]))
