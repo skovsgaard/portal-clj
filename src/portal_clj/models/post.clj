@@ -3,7 +3,7 @@
             [portal-clj.db :as db]))
 
 (defn all []
-  (into [] (sql/query db/spec ["select * from posts order by id title"])))
+  (into [] (sql/query db/spec ["select * from posts order by created_at desc"])))
 
 (defn create! [post]
   (sql/insert! db/spec :posts post))
