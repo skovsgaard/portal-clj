@@ -12,3 +12,10 @@
 (def footer
   [:footer
    [:span "&copy;SBC 2015"]])
+
+(defn sidebar []
+  [:aside
+   [:ul
+    [:li "Something"]
+    [:li "something"]
+    [:li "something else"]]])
