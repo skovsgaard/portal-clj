@@ -15,9 +15,7 @@
   (layout/common (base/tags (tag/all))))
 
 (defn login []
-  (layout/common (base/tags (tags/all))))
-
-(defn login [] "")
+  (layout/common (base/login)))
 
 (defroutes home-routes
   (GET "/" [] (home))

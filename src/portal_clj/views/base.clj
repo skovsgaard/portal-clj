@@ -1,6 +1,7 @@
 (ns portal-clj.views.base
   (:use [hiccup.core])
-  (:require [portal-clj.views.layout :as layout]))
+  (:require [portal-clj.views.layout :as layout]
+            [hiccup.form :refer [form-to]]))
 
 (defn post-item [post]
   [:article.blog-post
@@ -29,6 +30,17 @@
      and related components. This includes the latest in flagship series such as
      the Raspberry Pi and the Parallela board."]
     [:img {:src "/img/raspberry.jpg" :title "The all new Raspberry Pi 2"}]]
+   layout/footer])
+
+(defn login []
+  [:section.wrap
+   layout/header
+   [:section.login-container
+    [:h1 "Please log in below."]
+    (form-to [:post "/post/login"]
+             [:input {:type "email"}] [:br]
+             [:input {:type "password"}] [:br]
+             [:input {:type "submit"}])]
    layout/footer])
 
 (defn tags [tag-list]
