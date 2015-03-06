@@ -3,7 +3,7 @@
             [portal-clj.db :as db]))
 
 (defn all []
-  (into [] (sql/query db/spec ["select * from tags order by id username"])))
+  (into [] (sql/query db/spec ["select * from tags order by id"])))
 
 (defn create! [user]
   (sql/insert! db/spec :tags user))

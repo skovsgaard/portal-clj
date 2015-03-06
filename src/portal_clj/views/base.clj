@@ -8,6 +8,10 @@
    [:p (get post :body)]
    [:p.timestamp (get post :created_at)]])
 
+(defn tag-item [tag]
+  [:li.tag-entry
+   [:a {:href (str "/tag/" (get tag :name))} (get tag :name)]])
+
 (defn index [posts]
   [:section.wrap
    layout/header
@@ -26,3 +30,11 @@
      the Raspberry Pi and the Parallela board."]
     [:img {:src "/img/raspberry.jpg" :title "The all new Raspberry Pi 2"}]]
    layout/footer])
+
+(defn tags [tag-list]
+  [:section.wrap
+   layout/header
+   [:section.tag-list
+    [:h1 "Tagged categories."]
+    [:ul
+     (for [x tag-list] (tag-item x))]]])
