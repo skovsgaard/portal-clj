@@ -13,9 +13,10 @@
   [:footer
    [:span "&copy;SBC 2015"]])
 
-(defn sidebar []
-  [:aside
-   [:ul
-    [:li "Something"]
-    [:li "something"]
-    [:li "something else"]]])
+(defn menu [links]
+  [:nav.main-nav
+   [:ul (for [x links] [:li [:a {:href (first x)} (second x)]])]])
+
+(defn sidebar [items]
+  [:aside.sidebar
+   [:ul (for [x items] [:li x])]])

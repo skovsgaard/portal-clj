@@ -5,5 +5,7 @@
 (def index
   [:section.wrap
    [:h1 "Helloooooo, Wooooorld!"]
-   (layout/sidebar)
+   (layout/menu [["/" "Something"]
+                 ["//google.com" "something"]
+                 ["#" "something else"]])
    layout/footer])

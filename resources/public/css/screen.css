@@ -12,9 +12,18 @@ h1 {
 
 .wrap {
   margin: 0 auto;
-  max-width: 700px;
+  max-width: 900px;
 }
 
 footer {
   font-size: 12px;
+}
+
+.main-nav ul {
+  list-style: none;
+}
+
+.main-nav ul > li {
+  display: inline;
+  padding: 4px 4px 4px 0;
 }
