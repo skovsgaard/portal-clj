@@ -10,12 +10,19 @@
 
 (defn index [posts]
   [:section.wrap
-   [:header.main-header
-     [:span.title "SBC - Single Board Computers"]
-     (layout/menu [["/page/about" "About us"]
-                   ["/page/tags" "News by tag"]
-                   ["/page/login" "Login"]])]
+   layout/header
    [:section.blog
     [:h1 "Latest news!"]
     (for [x posts] (post-item x))]
-    layout/footer])
+   layout/footer])
+
+(defn about []
+  [:section.wrap
+   layout/header
+   [:section.page-body
+    [:h1 "About SBC"]
+    [:p "SBC is a company specializing in retail sales of single board computers
+     and related components. The includes flagship products such as the
+     Raspberry Pi and the Parallela board."]
+    [:img {:src "/img/raspberry.jpg" :title "The all new Raspberry Pi 2"}]]
+   layout/footer])

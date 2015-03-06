@@ -7,5 +7,9 @@
 (defn home []
   (layout/common (base/index (post/all))))
 
+(defn about []
+  (layout/common (base/about)))
+
 (defroutes home-routes
-  (GET "/" [] (home)))
+  (GET "/" [] (home))
+  (GET "/page/about" [] (about)))

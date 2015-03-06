@@ -9,13 +9,20 @@
     [:script {:src "/js/cljs.js"}]]
     [:body body]))
 
-(def footer
-  [:footer
-   [:span "&copy;SBC 2015"]])
-
 (defn menu [links]
   [:nav.main-nav
    [:ul (for [x links] [:li [:a {:href (first x)} (second x)]])]])
+
+(def header
+  [:header.main-header
+    [:span.title "SBC - Single Board Computers"]
+    (menu [["/page/about" "About us"]
+                  ["/page/tags" "News by tag"]
+                  ["/page/login" "Login"]])])
+
+(def footer
+  [:footer
+   [:span "&copy;SBC 2015"]])
 
 (defn sidebar [items]
   [:aside.sidebar
