@@ -15,7 +15,7 @@
 
 (def header
   [:header.main-header
-    [:span.title "SBC - Single Board Computers"]
+    [:span.title [:a {:href "/"} "SBC - Single Board Computers"]]
     (menu [["/page/about" "About us"]
                   ["/page/tags" "News by tag"]
                   ["/page/login" "Login"]])])
