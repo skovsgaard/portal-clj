@@ -11,6 +11,9 @@
 (defn get [id]
   (sql/query db/spec ["select * from users where id = ?" id]))
 
+(defn get-by-email [email]
+  (sql/query db/spec ["select * from users where email = ?" email]))
+
 (defn update! [id updated]
   (sql/update! db/spec :users updated ["id = ?" id]))
 

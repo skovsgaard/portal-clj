@@ -6,7 +6,8 @@
             [portal-clj.views.layout :as layout]
             [portal-clj.views.base :as base]
             [portal-clj.models.post :as post]
-            [portal-clj.models.tag :as tag]))
+            [portal-clj.models.tag :as tag]
+            [portal-clj.models.user :as db-user]))
 
 (defn with-session [template session]
   {:body template
@@ -24,21 +25,24 @@
   (-> (layout/common (base/tags (tag/all)))
       (with-session session)))
 
-(defn login [session]
-  (-> (layout/common (base/login))
+(defn login [session msg]
+  (-> (layout/common (base/login msg))
       (with-session session)))
 
 (defn do-login [req]
   (let [params (get req :params)
         session (get req :session)]
-    (if (= (get params :email) "idi@admin.com")
-      (-> (layout/common (admin/home))
-          (with-session session))
-      (layout/common (user/home)))))
+    (let [user (-> (get params :email) db-user/get-by-email first)]
+      (if-not (= user nil)
+        (if (get user :admin)
+          (-> (assoc session :user (user :id))
+              (admin/home))
+          (layout/common (user/home)))
+        (login {} "You either mistyped something or are not in our system.")))))
 
 (defroutes home-routes
   (GET "/" {session :session} (home session))
   (GET "/page/about" {session :session} (about session))
   (GET "/page/tags" {session :session} (tags session))
-  (GET "/page/login" {session :session} (login session))
+  (GET "/page/login" {session :session} (login session ""))
   (POST "/page/login" req (do-login req)))

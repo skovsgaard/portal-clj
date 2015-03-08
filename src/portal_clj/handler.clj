@@ -1,5 +1,6 @@
 (ns portal-clj.handler
   (:require [compojure.core :refer [defroutes routes]]
+            [ring.middleware.session :as session]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [hiccup.middleware :refer [wrap-base-url]]
@@ -21,4 +22,5 @@
 (def app
   (-> (routes home-routes admin-routes app-routes)
       (handler/site)
-      (wrap-base-url)))
+      (wrap-base-url)
+      (session/wrap-session)))

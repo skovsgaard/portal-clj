@@ -32,11 +32,12 @@
     [:img {:src "/img/raspberry.jpg" :title "The all new Raspberry Pi 2"}]]
    layout/footer])
 
-(defn login []
+(defn login [msg]
   [:section.wrap
    layout/header
    [:section.login-container
     [:h1 "Please log in below."]
+    (if (> (count msg) 0) [:p.message msg])
     (form-to [:post "/page/login"]
              [:input {:type "email" :name "email"}] [:br]
              [:input {:type "password" :name "password"}] [:br]
