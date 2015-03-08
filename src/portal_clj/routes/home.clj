@@ -1,6 +1,7 @@
 (ns portal-clj.routes.home
   (:require [compojure.core :refer :all]
             [portal-clj.routes.admin :as admin]
+            [portal-clj.routes.user :as user]
             [portal-clj.views.layout :as layout]
             [portal-clj.views.base :as base]
             [portal-clj.models.post :as post]
@@ -22,7 +23,7 @@
   (let [params (get user-credentials :params)]
     (if (= (get params :email) "idi@admin.com")
       (layout/common (admin/home))
-      (layout/common (base/index (post/all))))))
+      (layout/common (user/home)))))
 
 (defroutes home-routes
   (GET "/" [] (home))
