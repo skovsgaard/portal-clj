@@ -9,9 +9,9 @@
            [:textarea {:width 700 :name "post-content" :placeholder "Enter your post here."}] [:br]
            [:input {:type :submit :name :submit-post}]))
 
-(defn post-post []
+(defn post-post [session]
   [:section.wrap
-   layout/header
+   (layout/cond-header session)
    [:section.dash-main
     [:article.post-post
      [:h1 "Post successful!"]]
@@ -25,9 +25,7 @@
 
 (defn index [session users]
   [:section.wrap
-   (if (get session :id)
-     layout/header
-     layout/header-authed)
+   (layout/cond-header session)
    [:section.dash-main
     [:h1 "Welcome, admin!"]
     [:h2 "Create new post."]

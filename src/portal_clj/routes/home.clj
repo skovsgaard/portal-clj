@@ -14,19 +14,19 @@
    :session session})
 
 (defn home [session]
-  (-> (layout/common (base/index (post/all)))
+  (-> (layout/common (base/index session (post/all)))
       (with-session session)))
 
 (defn about [session]
-  (-> (layout/common (base/about))
+  (-> (layout/common (base/about session))
       (with-session session)))
 
 (defn tags [session]
-  (-> (layout/common (base/tags (tag/all)))
+  (-> (layout/common (base/tags session (tag/all)))
       (with-session session)))
 
 (defn login [session msg]
-  (-> (layout/common (base/login msg))
+  (-> (layout/common (base/login session msg))
       (with-session session)))
 
 (defn do-login [req]

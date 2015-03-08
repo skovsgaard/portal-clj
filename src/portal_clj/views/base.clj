@@ -13,17 +13,17 @@
   [:li.tag-entry
    [:a {:href (str "/tag/" (get tag :name))} (get tag :name)]])
 
-(defn index [posts]
+(defn index [session posts]
   [:section.wrap
-   layout/header
+   (layout/cond-header session)
    [:section.blog
     [:h1 "Latest news!"]
     (for [x posts] (post-item x))]
    layout/footer])
 
-(defn about []
+(defn about [session]
   [:section.wrap
-   layout/header
+   (layout/cond-header session)
    [:section.page-body
     [:h1 "About SBC"]
     [:p "SBC is a company specializing in retail sales of single board computers
@@ -32,9 +32,9 @@
     [:img {:src "/img/raspberry.jpg" :title "The all new Raspberry Pi 2"}]]
    layout/footer])
 
-(defn login [msg]
+(defn login [session msg]
   [:section.wrap
-   layout/header
+   (layout/cond-header session)
    [:section.login-container
     [:h1 "Please log in below."]
     (if (> (count msg) 0) [:p.message msg])
@@ -44,9 +44,9 @@
              [:input {:type "submit"}])]
    layout/footer])
 
-(defn tags [tag-list]
+(defn tags [session tag-list]
   [:section.wrap
-   layout/header
+   (layout/cond-header session)
    [:section.tag-list
     [:h1 "Tagged categories."]
     [:ul

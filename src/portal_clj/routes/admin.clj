@@ -14,7 +14,7 @@
         (with-session session)))
 
 (defn do-post [req]
-  (-> (layout/common (admin/post-post))
+  (-> (layout/common (admin/post-post (get req :session)))
       (with-session (get req :session))))
 
 (defroutes admin-routes

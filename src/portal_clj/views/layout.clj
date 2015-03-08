@@ -27,6 +27,9 @@
           ["/page/tags" "News by tag"]
           ["/page/logout" "Logout"]])])
 
+(defn cond-header [session]
+  (if (get session :id) header header-authed))
+
 (def footer
   [:footer
    [:span "&copy;SBC 2015"]])
