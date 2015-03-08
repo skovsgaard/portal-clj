@@ -51,3 +51,10 @@
     [:h1 "Tagged categories."]
     [:ul
      (for [x tag-list] (tag-item x))]]])
+
+(defn logout []
+  [:section.wrap
+   layout/header
+   [:section.page-body
+    [:h1 "You have successfully been logged out."]]
+   layout/footer])

@@ -26,8 +26,17 @@
       (with-session session)))
 
 (defn login [session msg]
+  (println session)
   (-> (layout/common (base/login session msg))
       (with-session session)))
+
+(defn logout [session]
+  (try
+    (println session)
+    (-> (layout/common (base/index {} (post/all)))
+        (with-session (assoc session :user nil)))
+    (catch Exception ex
+      (println ex))))
 
 (defn do-login [req]
   (let [params (get req :params)
@@ -46,4 +55,5 @@
   (GET "/page/about" {session :session} (about session))
   (GET "/page/tags" {session :session} (tags session))
   (GET "/page/login" {session :session} (login session ""))
+  (GET "/page/logout" {session :session} (logout session))
   (POST "/page/login" req (do-login req)))

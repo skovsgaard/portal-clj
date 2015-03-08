@@ -28,7 +28,9 @@
           ["/page/logout" "Logout"]])])
 
 (defn cond-header [session]
-  (if (get session :id) header header-authed))
+  (if (get session :user)
+    header-authed
+    header))
 
 (def footer
   [:footer
