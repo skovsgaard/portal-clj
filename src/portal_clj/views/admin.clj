@@ -23,9 +23,11 @@
    [:a {:href (str "/user/list/" (get user :username))}
         [:span.username (get user :username)]]])
 
-(defn index [users]
+(defn index [session users]
   [:section.wrap
-   layout/header
+   (if (get session :id)
+     layout/header
+     layout/header-authed)
    [:section.dash-main
     [:h1 "Welcome, admin!"]
     [:h2 "Create new post."]

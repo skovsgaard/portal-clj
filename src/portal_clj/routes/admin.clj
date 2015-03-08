@@ -10,7 +10,7 @@
 
 (defn home [session]
     (println session)
-    (-> (layout/common (admin/index (user/all)))
+    (-> (layout/common (admin/index session (user/all)))
         (with-session session)))
 
 (defn do-post [req]
