@@ -37,7 +37,8 @@
         (if (get user :admin)
           (-> (assoc session :user (user :id))
               (admin/home))
-          (layout/common (user/home)))
+          (-> (assoc session :user (user :id))
+              (user/home)))
         (login {} "You either mistyped something or are not in our system.")))))
 
 (defroutes home-routes
