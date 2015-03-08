@@ -3,7 +3,7 @@
             [portal-clj.db :as db]))
 
 (defn all []
-  (into [] (sql/query db/spec ["select * from users order by id username"])))
+  (into [] (sql/query db/spec ["select * from users order by username desc"])))
 
 (defn create! [user]
   (sql/insert! db/spec :users user))

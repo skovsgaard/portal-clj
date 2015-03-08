@@ -37,9 +37,9 @@
    layout/header
    [:section.login-container
     [:h1 "Please log in below."]
-    (form-to [:post "/post/login"]
-             [:input {:type "email"}] [:br]
-             [:input {:type "password"}] [:br]
+    (form-to [:post "/page/login"]
+             [:input {:type "email" :name "email"}] [:br]
+             [:input {:type "password" :name "password"}] [:br]
              [:input {:type "submit"}])]
    layout/footer])
 

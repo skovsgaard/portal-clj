@@ -5,7 +5,8 @@
             [hiccup.middleware :refer [wrap-base-url]]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [portal-clj.routes.home :refer [home-routes]]))
+            [portal-clj.routes.home :refer [home-routes]]
+            [portal-clj.routes.admin :refer [admin-routes]]))
 
 (defn init []
   (println "portal-clj is starting"))
@@ -18,6 +19,6 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes home-routes app-routes)
+  (-> (routes home-routes admin-routes app-routes)
       (handler/site)
       (wrap-base-url)))
