@@ -15,10 +15,17 @@
 
 (def header
   [:header.main-header
-    [:span.title [:a {:href "/"} "SBC - Single Board Computers"]]
-    (menu [["/page/about" "About us"]
-                  ["/page/tags" "News by tag"]
-                  ["/page/login" "Login"]])])
+   [:span.title [:a {:href "/"} "SBC - Single Board Computers"]]
+   (menu [["/page/about" "About us"]
+          ["/page/tags" "News by tag"]
+          ["/page/login" "Login"]])])
+
+(def header-authed
+  [:header.main-header
+   [:span.title [:a {:href "/"} "SBC - Single Board Computers"]]
+   (menu [["/page/about" "About us"]
+          ["/page/tags" "News by tag"]
+          ["/page/logout" "Logout"]])])
 
 (def footer
   [:footer
