@@ -50,10 +50,7 @@
         (login {} "You either mistyped something or are not in our system.")))))
 
 (defn search [req]
-  (let [params (get req :params)]
-    (println
-     (-> (tag/get-by-name (get params :search))
-         (post-tag/get-by-tag)))))
+  (layout/common (base/search (get req :session) [])))
 
 (defroutes home-routes
   (GET "/" {session :session} (home session))

@@ -58,3 +58,8 @@
    [:section.page-body
     [:h1 "You have successfully been logged out."]]
    layout/footer])
+
+(defn search [session result]
+  [:section.wrap
+   (layout/cond-header session)
+   [:h1 "Search results to come."]])
