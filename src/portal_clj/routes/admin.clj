@@ -46,8 +46,22 @@
   (io/copy (take-multipart req "testupload")
            (io/file (str "resources/public/img/" (take-multipart-name req "testupload")))))
 
+(defn activate-user [req]
+  (-> (get req :params)
+      (get :uid)
+      (user/update! {:active 1}))
+  (home (get req :session)))
+
+(defn deactivate-user [req]
+  (-> (get req :params)
+      (get :uid)
+      (user/update! {:active 0}))
+  (home (get req :session)))
+
 (defroutes admin-routes
   (GET "/admin/home" {session :session} (home session))
   (POST "/admin/post" req (do-post req))
+  (POST "/admin/activate" req (activate-user req))
+  (POST "/admin/deactivate" req (deactivate-user req))
   (multipart/wrap-multipart-params
    (POST "/admin/upload" req (do-upload req))))

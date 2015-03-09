@@ -29,7 +29,7 @@ body {
   max-width: 700px;
 }
 
-.blog {
+.blog, .user-list, .tag-list, .page-body {
   padding-bottom: 40px;
 }
 
@@ -44,6 +44,10 @@ body {
 
 .user-list {
   list-style: none;
+}
+
+.activate, .deactivate {
+  display: inline-block;
 }
 
 h1 {

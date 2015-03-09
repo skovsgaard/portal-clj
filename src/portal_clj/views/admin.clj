@@ -27,7 +27,14 @@
   [:li.user-item
    [:a {:href (str "/user/list/" (get user :username))}
     [:span.username (get user :username)]]
-   [:span.activity (str " - " (if (get user :active) "Active" "Deactivated"))]])
+   [:span.activity (str " - Status: " (if (get user :active) "Active" "Deactivated") " - ")
+    (if (get user :active)
+      [:form.deactivate {:method :post :action "/admin/deactivate"}
+       [:input {:type "hidden" :name "uid" :value (get user :id)}]
+       [:input {:type "submit" :value "Deactivate"}]]
+      [:form.activate {:method :post :action "/admin/activate"}
+       [:input {:type "hidden" :name "uid" :value (get user :id)}]
+       [:input {:type "submit" :value "Activate"}]])]])
 
 (defn index [session users]
   [:section.wrap
