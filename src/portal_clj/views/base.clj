@@ -62,4 +62,5 @@
 (defn search [session result]
   [:section.wrap
    (layout/cond-header session)
-   [:h1 "Search results to come."]])
+   [:h1 "Search results to come."]
+   layout/footer])
