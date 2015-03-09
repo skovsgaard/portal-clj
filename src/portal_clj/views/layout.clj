@@ -13,7 +13,7 @@
 (defn search-bar []
   [:article#search
    (form-to [:post "/page/search"]
-            [:input {:type :text :placeholder "Search archive"}]
+            [:input {:type :text :placeholder "Search archive" :name "search"}]
             [:input {:type :submit :value "Search"}])])
 
 (defn menu [links]

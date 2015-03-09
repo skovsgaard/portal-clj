@@ -8,7 +8,7 @@
 (defn create! [page]
   (sql/insert! db/spec :pages page))
 
-(defn get [id]
+(defn retrieve [id]
   (sql/query db/spec ["select * from :pages where id = ?" id]))
 
 (defn update! [id updated]

@@ -8,7 +8,7 @@
 (defn create! [user]
   (sql/insert! db/spec :post_authors user))
 
-(defn get [id]
+(defn retrieve [id]
   (sql/query db/spec ["select * from post_authors where id = ?" id]))
 
 (defn update! [id updated]

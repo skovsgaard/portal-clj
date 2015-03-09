@@ -8,7 +8,7 @@
 (defn create! [user]
   (sql/insert! db/spec :users user))
 
-(defn get [id]
+(defn retrieve [id]
   (sql/query db/spec ["select * from users where id = ?" id]))
 
 (defn get-by-email [email]

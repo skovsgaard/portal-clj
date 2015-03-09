@@ -8,7 +8,7 @@
 (defn create! [user]
   (sql/insert! db/spec :tags user))
 
-(defn get [id]
+(defn retrieve [id]
   (sql/query db/spec ["select * from tags where id = ?" id]))
 
 (defn update! [id updated]

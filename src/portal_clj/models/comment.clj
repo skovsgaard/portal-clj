@@ -8,7 +8,7 @@
 (defn create! [comment-entry]
   (sql/insert! db/spec :comments comment-entry))
 
-(defn get [id]
+(defn retrieve [id]
   (sql/query db/spec ["select * from users where id = ?" id]))
 
 (defn update! [id updated]
