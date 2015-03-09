@@ -26,7 +26,8 @@
 (defn user-listing [user]
   [:li.user-item
    [:a {:href (str "/user/list/" (get user :username))}
-        [:span.username (get user :username)]]])
+    [:span.username (get user :username)]]
+   [:span.activity (str " - " (if (get user :active) "Active" "Deactivated"))]])
 
 (defn index [session users]
   [:section.wrap

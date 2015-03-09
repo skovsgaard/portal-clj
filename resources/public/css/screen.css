@@ -42,6 +42,10 @@ body {
   font-size: 0.9em;
 }
 
+.user-list {
+  list-style: none;
+}
+
 h1 {
   font-size: 1.5em;
   text-decoration: underline;
