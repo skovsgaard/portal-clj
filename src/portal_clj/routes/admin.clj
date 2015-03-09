@@ -4,7 +4,9 @@
             [portal-clj.views.layout :as layout]
             [portal-clj.views.admin :as admin]
             [portal-clj.models.user :as user]
-            [portal-clj.models.post :as post]))
+            [portal-clj.models.post :as post]
+            [ring.middleware [multipart-params :as multipart]]
+            [clojure.java.io :as io]))
 
 (defn sluggify [title]
   (-> (string/lower-case title)
@@ -30,6 +32,22 @@
   (-> (layout/common (admin/post-post (get req :session)))
       (with-session (get req :session))))
 
+(defn take-multipart [req upload-name]
+  (-> (get req :multipart-params)
+      (get upload-name)
+      (get :tempfile)))
+
+(defn take-multipart-name [req upload-name]
+  (-> (get req :multipart-params)
+      (get upload-name)
+      (get :filename)))
+
+(defn do-upload [req]
+  (io/copy (take-multipart req "testupload")
+           (io/file (str "resources/public/img/" (take-multipart-name req "testupload")))))
+
 (defroutes admin-routes
   (GET "/admin/home" {session :session} (home session))
-  (POST "/admin/post" req (do-post req)))
+  (POST "/admin/post" req (do-post req))
+  (multipart/wrap-multipart-params
+   (POST "/admin/upload" req (do-upload req))))

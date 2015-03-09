@@ -3,6 +3,11 @@
   (:require [portal-clj.views.layout :as layout]
             [hiccup.form :refer [form-to]]))
 
+(def admin-upload
+  [:form {:action "/admin/upload"  :method "post" :enctype "multipart/form-data"}
+   [:input {:type "file" :name "testupload" :enctype "multipart"}] [:br]
+   [:input {:type "submit" :name "submit-upload" :value "Upload file"}]])
+
 (def admin-author
   (form-to [:post "/admin/post"]
            [:input {:type :text :name :title :placeholder "Enter your title here."}] [:br]
@@ -29,7 +34,8 @@
    [:section.dash-main
     [:h1 "Welcome, admin!"]
     [:h2 "Create new post."]
-    admin-author]
+    admin-author
+    admin-upload]
    [:section.user-list
     [:h2 "Full list of registered users."]
     [:ul.user-list
