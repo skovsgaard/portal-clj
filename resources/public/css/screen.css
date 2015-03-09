@@ -6,6 +6,15 @@ body {
   font-size: 14px;
 }
 
+#search {
+  display: inline-block;
+  margin-left: 15%;
+}
+
+#search input {
+  max-width: 100px;
+}
+
 .title {
   font-family: 'Exo 2', sans-serif;
 }
@@ -54,6 +63,10 @@ nav {
 .main-nav ul {
   padding: 0;
   list-style: none;
+}
+
+.main-nav {
+  display: inline-block;
 }
 
 .main-nav ul > li {

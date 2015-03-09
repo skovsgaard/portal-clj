@@ -1,5 +1,6 @@
 (ns portal-clj.views.layout
-  (:require [hiccup.page :refer [html5 include-css]]))
+  (:require [hiccup.page :refer [html5 include-css]]
+            [hiccup.form :refer [form-to]]))
 
 (defn common [& body]
   (html5
@@ -8,6 +9,12 @@
     (include-css "/css/screen.css")
     [:script {:src "/js/cljs.js"}]]
     [:body body]))
+
+(defn search-bar []
+  [:article#search
+   (form-to [:post "/page/search"]
+            [:input {:type :text :placeholder "Search archive"}]
+            [:input {:type :submit :value "Search"}])])
 
 (defn menu [links]
   [:nav.main-nav
@@ -18,14 +25,16 @@
    [:span.title [:a {:href "/"} "SBC - Single Board Computers"]]
    (menu [["/page/about" "About us"]
           ["/page/tags" "News by tag"]
-          ["/page/login" "Login"]])])
+          ["/page/login" "Login"]])
+   (search-bar)])
 
 (def header-authed
   [:header.main-header
    [:span.title [:a {:href "/"} "SBC - Single Board Computers"]]
    (menu [["/page/about" "About us"]
           ["/page/tags" "News by tag"]
-          ["/page/logout" "Logout"]])])
+          ["/page/logout" "Logout"]])
+   (search-bar)])
 
 (defn cond-header [session]
   (if (get session :user)
