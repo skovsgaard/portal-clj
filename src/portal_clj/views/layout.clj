@@ -1,6 +1,7 @@
 (ns portal-clj.views.layout
   (:require [hiccup.page :refer [html5 include-css]]
-            [hiccup.form :refer [form-to]]))
+            [hiccup.form :refer [form-to]]
+            [portal-clj.models.user :as user]))
 
 (defn common [& body]
   (html5
@@ -28,17 +29,20 @@
           ["/page/login" "Login"]])
    (search-bar)])
 
-(def header-authed
+(defn header-authed [session]
   [:header.main-header
    [:span.title [:a {:href "/"} "SBC - Single Board Computers"]]
-   (menu [["/page/about" "About us"]
+   (menu [(if (user/is-admin? (get session :user))
+            ["/admin/home" "Dashboard"]
+            ["/user/home" "Dashboard"])
+          ["/page/about" "About us"]
           ["/page/tags" "News by tag"]
           ["/page/logout" "Logout"]])
    (search-bar)])
 
 (defn cond-header [session]
   (if (get session :user)
-    header-authed
+    (header-authed session)
     header))
 
 (def footer

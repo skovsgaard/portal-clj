@@ -19,3 +19,9 @@
 
 (defn delete! [id]
   (sql/delete! db/spec :users ["id = ?" id]))
+
+(defn is-admin? [id]
+  (-> (retrieve id)
+      first
+      (get :admin)
+      (= true)))

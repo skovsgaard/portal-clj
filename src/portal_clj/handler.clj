@@ -7,7 +7,8 @@
             [compojure.handler :as handler]
             [compojure.route :as route]
             [portal-clj.routes.home :refer [home-routes]]
-            [portal-clj.routes.admin :refer [admin-routes]]))
+            [portal-clj.routes.admin :refer [admin-routes]]
+            [portal-clj.routes.user :refer [user-routes]]))
 
 (defn init []
   (println "portal-clj is starting"))
@@ -20,7 +21,7 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes home-routes admin-routes app-routes)
+  (-> (routes home-routes user-routes admin-routes app-routes)
       (handler/site)
       (wrap-base-url)
       (session/wrap-session)))
