@@ -6,6 +6,7 @@
             [portal-clj.views.layout :as layout]
             [portal-clj.views.base :as base]
             [portal-clj.models.post :as post]
+            [portal-clj.models.post-tag :as post-tag]
             [portal-clj.models.tag :as tag]
             [portal-clj.models.user :as db-user]))
 
