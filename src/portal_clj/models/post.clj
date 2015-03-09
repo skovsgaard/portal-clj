@@ -12,7 +12,7 @@
 (defn retrieve [id]
   (sql/query db/spec ["select * from posts where id = ?" id]))
 
-(defn update [id updated]
+(defn update! [id updated]
   (sql/update! db/spec :posts updated ["id = ?" id]))
 
 (defn delete [id]
