@@ -8,7 +8,6 @@
    :session session})
 
 (defn home [session]
-  (println session)
   (-> (layout/common (user/index))
       (with-session session)))
 

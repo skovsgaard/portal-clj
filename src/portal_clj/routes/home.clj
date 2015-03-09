@@ -26,13 +26,11 @@
       (with-session session)))
 
 (defn login [session msg]
-  (println session)
   (-> (layout/common (base/login session msg))
       (with-session session)))
 
 (defn logout [session]
   (try
-    (println session)
     (-> (layout/common (base/index {} (post/all)))
         (with-session (assoc session :user nil)))
     (catch Exception ex
@@ -52,7 +50,9 @@
 
 (defn search [req]
   (let [params (get req :params)]
-    (println (post/get-by-tag (get params :search)))))
+    (println
+     (-> (tag/get-by-name (get params :search))
+         (post-tag/get-by-tag)))))
 
 (defroutes home-routes
   (GET "/" {session :session} (home session))

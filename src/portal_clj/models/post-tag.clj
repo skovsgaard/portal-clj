@@ -16,3 +16,6 @@
 
 (defn delete! [id]
   (sql/delete! db/spec :post_tags ["id = ?" id]))
+
+(defn get-by-tag [tag-id]
+  (sql/query db/spec ["select * from post_tags where tag_id = ?" tag-id]))
