@@ -44,13 +44,15 @@
   (let [params (get req :params)
         session (get req :session)]
     (let [user (-> (get params :email) db-user/get-by-email first)]
-      (if-not (= user nil)
-        (if (get user :admin)
-          (-> (assoc session :user (user :id))
-              (admin/home))
-          (-> (assoc session :user (user :id))
-              (user/home)))
-        (login {} "You either mistyped something or are not in our system.")))))
+      (if (= (get user :active) true)
+        (if-not (= user nil)
+          (if (get user :admin)
+            (-> (assoc session :user (user :id))
+                (admin/home))
+            (-> (assoc session :user (user :id))
+                (user/home)))
+          (login {} "You either mistyped something or are not in our system."))
+        (login {} "Your account is disabled. Please contact an administrator.")))))
 
 (defn search [req]
   (layout/common (base/search (get req :session) [])))
