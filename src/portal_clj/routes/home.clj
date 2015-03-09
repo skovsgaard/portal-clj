@@ -15,8 +15,11 @@
    :session session})
 
 (defn home [session]
-  (-> (layout/common (base/index session (post/all)))
-      (with-session session)))
+  (if (get session :user)
+    (-> (layout/common (base/index session (post/all)))
+        (with-session session))
+    (-> (layout/common (base/index session (post/all-unrestricted)))
+        (with-session session))))
 
 (defn about [session]
   (-> (layout/common (base/about session))

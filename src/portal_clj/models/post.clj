@@ -17,3 +17,8 @@
 
 (defn delete [id]
   (sql/delete! db/spec :posts ["id = ?" id]))
+
+(defn all-unrestricted []
+  (into [] (sql/query db/spec ["select * from posts
+                               where restricted = 0
+                               order by created_at desc"])))

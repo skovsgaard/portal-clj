@@ -29,6 +29,10 @@ body {
   max-width: 700px;
 }
 
+.blog {
+  padding-bottom: 40px;
+}
+
 .blog-post {
   margin-bottom: 10px;
   padding-bottom: 10px;
@@ -46,10 +50,12 @@ h2 {font-size: 1.0em;}
 
 
 footer {
+  background: #fff;
   position: fixed;
-  bottom: 20px;
+  bottom: 0px;
   width: 700px;
   padding-top: 10px;
+  padding-bottom: 20px;
   border-top: 2px solid #ddd;
   font-size: 12px;
 }
