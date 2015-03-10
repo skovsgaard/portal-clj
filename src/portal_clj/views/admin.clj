@@ -1,7 +1,14 @@
 (ns portal-clj.views.admin
   (:use [hiccup.core])
   (:require [portal-clj.views.layout :as layout]
-            [hiccup.form :refer [form-to]]))
+            [hiccup.form :refer [form-to]]
+            [clojure.java.io :as io]))
+
+(def img-options
+  (map (fn [item] [:option {:value item} item])
+       (drop 1 (map (fn [f] (.getName f))
+                    (-> (io/file "resources/public/img/")
+                        file-seq)))))
 
 (def admin-upload
   [:form {:action "/admin/upload"  :method "post" :enctype "multipart/form-data"}
@@ -12,6 +19,8 @@
   (form-to [:post "/admin/post"]
            [:input {:type :text :name :title :placeholder "Enter your title here."}] [:br]
            [:textarea {:width 700 :name "post-content" :placeholder "Enter your post here."}] [:br]
+           [:label {:for "file-attach"} "Optional image-attachment: "]
+           [:select {:name "file-attach"} img-options] [:br]
            [:input {:type "checkbox" :name "restricted"} "Internal post only."] [:br]
            [:input {:type :submit :name :submit-post}]))
 

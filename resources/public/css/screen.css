@@ -50,7 +50,7 @@ body {
   display: inline-block;
 }
 
-.dash-main input, .dash-main textarea, .user-list input {
+.dash-main input, .dash-main textarea, .dash-main select, .user-list input {
   margin-bottom: 15px;
 }
 
