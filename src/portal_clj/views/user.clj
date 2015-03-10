@@ -3,6 +3,11 @@
   (:require [portal-clj.views.layout :as layout]
             [hiccup.form :refer [form-to]]))
 
+(def user-upload
+  [:form {:action "/user/upload"  :method "post" :enctype "multipart/form-data"}
+   [:input {:type "file" :name "upload" :enctype "multipart"}] [:br]
+   [:input {:type "submit" :name "submit-upload" :value "Upload file"}]])
+
 (def post-author
   (form-to [:post "/user/post"]
            [:input {:type :text :name :title :placeholder "Enter your title here."}] [:br]
@@ -15,5 +20,6 @@
    [:section.dash-main
     [:h1 "Welcome to your dashboard!"]
     [:h2 "Create new post."]
-    post-author]
+    post-author
+    user-upload]
    layout/footer])

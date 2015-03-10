@@ -5,7 +5,7 @@
 
 (def admin-upload
   [:form {:action "/admin/upload"  :method "post" :enctype "multipart/form-data"}
-   [:input {:type "file" :name "testupload" :enctype "multipart"}] [:br]
+   [:input {:type "file" :name "upload" :enctype "multipart"}] [:br]
    [:input {:type "submit" :name "submit-upload" :value "Upload file"}]])
 
 (def admin-author

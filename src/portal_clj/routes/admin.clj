@@ -43,8 +43,9 @@
       (get :filename)))
 
 (defn do-upload [req]
-  (io/copy (take-multipart req "testupload")
-           (io/file (str "resources/public/img/" (take-multipart-name req "testupload")))))
+  (io/copy (take-multipart req "upload")
+           (io/file (str "resources/public/img/" (take-multipart-name req "upload"))))
+  (home (get req :session)))
 
 (defn activate-user [req]
   (-> (get req :params)
