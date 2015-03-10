@@ -11,6 +11,11 @@
   [:article.blog-post
    [:h2 (get post :title)]
    [:p (htmlify (get post :body))]
+   (when (get post :image)
+     [:a {:href (str "/img/" (get post :image))}
+      [:img {:src (str "/img/" (get post :image))
+             :title (get post :image)
+             :width 300}]])
    [:p.timestamp (get post :created_at)]])
 
 (defn tag-item [tag]

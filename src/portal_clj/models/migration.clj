@@ -26,6 +26,7 @@
                    user_id INT(11) NOT NULL,
                    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                    slug VARCHAR(256) NOT NULL,
+                   image VARCHAR(128),
                    active BOOLEAN NOT NULL DEFAULT 1,
                    restricted BOOLEAN NOT NULL DEFAULT 0,
                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
@@ -41,6 +42,7 @@
                    commentable BOOLEAN NOT NULL DEFAULT 0,
                    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                    slug VARCHAR(256) NOT NULL,
+                   image VARCHAR(128),
                    active BOOLEAN NOT NULL DEFAULT 1,
                    restricted BOOLEAN NOT NULL DEFAULT 0,
                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
