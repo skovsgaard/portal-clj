@@ -5,6 +5,7 @@
             [portal-clj.views.admin :as admin]
             [portal-clj.models.user :as user]
             [portal-clj.models.post :as post]
+            [portal-clj.models.page :as page]
             [ring.middleware [multipart-params :as multipart]]
             [clojure.java.io :as io]))
 
@@ -32,6 +33,17 @@
                    :restricted (if (= (get post :restricted) "on") 1 0)}))
   (-> (layout/common (admin/post-post (get req :session)))
       (with-session (get req :session))))
+
+(defn do-page [req]
+  (let [post (get req :params)]
+    (page/create! {:title (get post :title)
+                   :body (get post :post-content)
+                   :user_id (-> (get req :session) (get :user))
+                   :slug (sluggify (get post :title))
+                   :image (get post :file-attach)
+                   :active 1
+                   :restricted (if (= (get post :restricted) "on") 1 0)}))
+  (home (get req :session)))
 
 (defn take-multipart [req upload-name]
   (-> (get req :multipart-params)
@@ -63,6 +75,7 @@
 (defroutes admin-routes
   (GET "/admin/home" {session :session} (home session))
   (POST "/admin/post" req (do-post req))
+  (POST "/admin/page" req (do-page req))
   (POST "/admin/activate" req (activate-user req))
   (POST "/admin/deactivate" req (deactivate-user req))
   (multipart/wrap-multipart-params

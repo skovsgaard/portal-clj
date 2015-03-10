@@ -22,7 +22,16 @@
            [:label {:for "file-attach"} "Optional image-attachment: "]
            [:select {:name "file-attach"} (into [:option {:selected "selected" :value ""} "None"] img-options)] [:br]
            [:input {:type "checkbox" :name "restricted"} "Internal post only."] [:br]
-           [:input {:type :submit :name :submit-post}]))
+           [:input {:type :submit :name :submit-post :value "Create post."}]))
+
+(def admin-page
+  (form-to [:post "/admin/page"]
+           [:input {:type :text :name :title :placeholder "Enter your title here."}] [:br]
+           [:textarea {:width 700 :name "post-content" :placeholder "Enter your page content here."}] [:br]
+           [:label {:for "file-attach"} "Optional image-attachment: "]
+           [:select {:name "file-attach"} (into [:option {:selected "selected" :value ""} "None"] img-options)] [:br]
+           [:input {:type "checkbox" :name "restricted"} "Internal page only."] [:br]
+           [:input {:type :submit :name :submit-post :value "Create page."}]))
 
 (defn post-post [session]
   [:section.wrap
@@ -54,7 +63,9 @@
     [:h2 "Create new post."]
     admin-author
     [:h2 "Upload a file to the server."]
-    admin-upload]
+    admin-upload
+    [:h2 "Create a new static page."]
+     admin-page]
    [:section.user-list
     [:h2 "Full list of registered users."]
     [:ul.user-list
