@@ -26,6 +26,7 @@
                    :user_id (-> (get req :session) (get :user))
                    :commentable 0
                    :slug (sluggify (get post :title))
+                   :image (get post :file-attach)
                    :active 1
                    :restricted (if (= (get post :restricted) "on") 1 0)}))
   (-> (layout/common (user/index (get req :session)))

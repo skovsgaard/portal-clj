@@ -11,7 +11,7 @@
   [:article.blog-post
    [:h2 (get post :title)]
    [:p (htmlify (get post :body))]
-   (when (get post :image)
+   (when (and (get post :image) (> (count (get post :image)) 1))
      [:a {:href (str "/img/" (get post :image))}
       [:img {:src (str "/img/" (get post :image))
              :title (get post :image)

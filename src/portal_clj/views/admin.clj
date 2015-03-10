@@ -20,7 +20,7 @@
            [:input {:type :text :name :title :placeholder "Enter your title here."}] [:br]
            [:textarea {:width 700 :name "post-content" :placeholder "Enter your post here."}] [:br]
            [:label {:for "file-attach"} "Optional image-attachment: "]
-           [:select {:name "file-attach"} img-options] [:br]
+           [:select {:name "file-attach"} (into [:option {:selected "selected" :value ""} "None"] img-options)] [:br]
            [:input {:type "checkbox" :name "restricted"} "Internal post only."] [:br]
            [:input {:type :submit :name :submit-post}]))
 
