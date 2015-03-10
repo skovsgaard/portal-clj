@@ -1,4 +1,4 @@
-(defproject portal-clj "0.3.0"
+(defproject portal-clj "0.4.0"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.6.0"]
