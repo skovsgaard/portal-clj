@@ -1,7 +1,8 @@
 (ns portal-clj.repl
   (:use portal-clj.handler
         ring.server.standalone
-        [ring.middleware file-info file]))
+        [ring.middleware file-info file])
+  (:gen-class :main true))
 
 (defonce server (atom nil))
 
@@ -32,3 +33,6 @@
 (defn stop-server []
   (.stop @server)
   (reset! server nil))
+
+(defn -main [& args]
+  (start-server))

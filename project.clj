@@ -1,4 +1,4 @@
-(defproject portal-clj "0.2.0"
+(defproject portal-clj "0.3.0"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.6.0"]
@@ -14,6 +14,7 @@
   :cljsbuild {:builds [{:source-paths ["src/cljs"]
                         :compiler {:output-to "resources/public/js/cljs.js"
                                    :optimizations :advanced}}]}
+  :main portal-clj.repl
   :ring {:handler portal-clj.handler/app
          :init portal-clj.handler/init
          :destroy portal-clj.handler/destroy}
