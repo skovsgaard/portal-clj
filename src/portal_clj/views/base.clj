@@ -1,12 +1,16 @@
 (ns portal-clj.views.base
   (:use [hiccup.core])
   (:require [portal-clj.views.layout :as layout]
-            [hiccup.form :refer [form-to]]))
+            [hiccup.form :refer [form-to]]
+            [clojure.string :as string]))
+
+(defn htmlify [text]
+  (string/replace text #"\n" "<br/>"))
 
 (defn post-item [post]
   [:article.blog-post
    [:h2 (get post :title)]
-   [:p (get post :body)]
+   [:p (htmlify (get post :body))]
    [:p.timestamp (get post :created_at)]])
 
 (defn tag-item [tag]
