@@ -103,10 +103,10 @@
 (defn do-dummy []
   (do
     (println "Running dummy inserts.")
-    (sql/insert! db/spec :users {:firstname "Idi"
+    (sql/insert! db/spec :users {:firstname "Some"
                                  :lastname "Admin"
                                  :username "dummy_admin"
-                                 :email "idi@admin.com"
+                                 :email "some@admin.com"
                                  :admin 1
                                  :comments 1
                                  :active 1})
@@ -137,9 +137,9 @@
                                  :slug "also-dummy-post"
                                  :active 1
                                  :restricted 0})
-    (sql/insert! db/spec :comment_authors {:name "Idi Admin" :user_id 1})
+    (sql/insert! db/spec :comment_authors {:name "Some Admin" :user_id 1})
     (sql/insert! db/spec :comments {:title "Heyoo"
-                                    :body "I'm a dummy comment, dummy!"
+                                    :body "I'm a dummy comment!"
                                     :author_id 1
                                     :post_id 1})
     (sql/insert! db/spec :tags {:name "dummy" :restricted 0})
