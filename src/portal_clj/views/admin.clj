@@ -43,6 +43,7 @@
     [:h1 "Welcome, admin!"]
     [:h2 "Create new post."]
     admin-author
+    [:h2 "Upload a file to the server."]
     admin-upload]
    [:section.user-list
     [:h2 "Full list of registered users."]

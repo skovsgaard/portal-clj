@@ -21,5 +21,6 @@
     [:h1 "Welcome to your dashboard!"]
     [:h2 "Create new post."]
     post-author
+    [:h2 "Upload a file to the server."]
     user-upload]
    layout/footer])

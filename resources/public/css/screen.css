@@ -50,6 +50,15 @@ body {
   display: inline-block;
 }
 
+.dash-main input, .dash-main textarea, .user-list input {
+  margin-bottom: 15px;
+}
+
+textarea {
+  min-width: 50%;
+  min-height: 5em;
+}
+
 h1 {
   font-size: 1.5em;
   text-decoration: underline;
