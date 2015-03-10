@@ -35,8 +35,7 @@
 
 (defn logout [session]
   (try
-    (-> (layout/common (base/index {} (post/all)))
-        (with-session (assoc session :user nil)))
+    (-> (home {}))
     (catch Exception ex
       (println ex))))
 

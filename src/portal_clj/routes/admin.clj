@@ -28,7 +28,7 @@
                    :commentable 0
                    :slug (sluggify (get post :title))
                    :active 1
-                   :restricted 0}))
+                   :restricted (if (= (get post :restricted) "on") 1 0)}))
   (-> (layout/common (admin/post-post (get req :session)))
       (with-session (get req :session))))
 

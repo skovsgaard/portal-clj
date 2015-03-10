@@ -12,6 +12,7 @@
   (form-to [:post "/admin/post"]
            [:input {:type :text :name :title :placeholder "Enter your title here."}] [:br]
            [:textarea {:width 700 :name "post-content" :placeholder "Enter your post here."}] [:br]
+           [:input {:type "checkbox" :name "restricted"} "Internal post only."] [:br]
            [:input {:type :submit :name :submit-post}]))
 
 (defn post-post [session]
