@@ -2,4 +2,4 @@
   (:import [price_updates Scraper]))
 
 (defn -main [& args]
-  (Scraper/testSelf))
+  (println (Scraper/get "http://fupifarvandet.dk" "a")))
