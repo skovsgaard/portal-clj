@@ -2,7 +2,8 @@
   (:use [hiccup.core])
   (:require [portal-clj.views.layout :as layout]
             [hiccup.form :refer [form-to]]
-            [clojure.string :as string]))
+            [clojure.string :as string])
+  (:import [price_updates Scraper]))
 
 (defn htmlify [text]
   (string/replace text #"\n" "<br/>"))
@@ -38,7 +39,20 @@
     [:p "SBC is a company specializing in retail sales of single board computers
      and related components. This includes the latest in flagship series such as
      the Raspberry Pi and the Parallela board."]
-    [:img {:src "/img/raspberry.jpg" :title "The all new Raspberry Pi 2"}]]
+    [:img {:src "/img/raspberry.jpg" :title "The all new Raspberry Pi 2"}]
+    [:p "Below you will find live price updates on some of our biggest products."]
+    [:div#raspberry
+     [:p (str "The latest price of the Raspberry Pi 2 is "
+              (Scraper/getRaspberryPi 1)
+              " USD")]]
+    [:div#parallella
+     [:p (str "The latest price of the Parallella board is "
+              (Scraper/getParallella 1)
+              " USD")]]
+    [:div#beagle
+     [:p (str "The latest price of the BeagleBone Black is "
+              (Scraper/getBeagleBone 1)
+              " USD")]]]
    layout/footer])
 
 (defn login [session msg]
