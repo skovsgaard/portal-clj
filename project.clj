@@ -8,9 +8,10 @@
                  [compojure "1.1.6"]
                  [hiccup "1.0.5"]
                  [ring-server "0.3.1"]
-                 [com.cemerick/friend "0.2.1"]]
+                 [org.jsoup/jsoup "1.8.1"]]
   :plugins [[lein-ring "0.8.12"]
             [lein-cljsbuild "1.0.5"]]
+  :java-source-paths ["src/java"]
   :cljsbuild {:builds [{:source-paths ["src/cljs"]
                         :compiler {:output-to "resources/public/js/cljs.js"
                                    :optimizations :advanced}}]}
