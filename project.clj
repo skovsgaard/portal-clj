@@ -1,6 +1,6 @@
-(defproject portal-clj "0.4.1"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject portal-clj "0.5.0"
+  :description "A CMS built in Clojure using Java integration."
+  :url "https://github.com/skovsgaard/portal-clj"
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/java.jdbc "0.3.6"]
                  [org.clojure/clojurescript "0.0-2913"]
